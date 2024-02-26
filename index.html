@@ -4,6 +4,13 @@
 <head>
     <title>Calculate Your Price</title>
     <style>
+        body {
+            background-image: url("bg.jpeg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
         p {
             font-weight: bolder;
         }
@@ -12,6 +19,7 @@
             border-collapse: collapse;
             width: 100%;
         }
+
         th,
         td {
             padding: 10px;
@@ -30,56 +38,171 @@
         tr:hover {
             background-color: #e5e5e5;
         }
+
+        select {
+            width: 150px;
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            appearance: none;
+            background: url("down_arrow.png") no-repeat right center;
+            background-size: 20px;
+        }
+
+        select:hover {
+            border-color: #999;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #555;
+            box-shadow: 0 0 5px rgba(85, 85, 85, 0.3);
+        }
     </style>
+    <script>
+        // JavaScript function to display the dynamic table
+        function showDynamicTable(event) {
+            event.preventDefault();
+
+            // Get the selected quantity of apples, pineapples, and oranges
+            var appleValue = document.getElementById("apple").value;
+            var pineappleValue = document.getElementById("pineapple").value;
+            var orangeValue = document.getElementById("orange").value;
+
+            // Price of each fruit
+            var applePrice = 1.0;
+            var pineapplePrice = 3.0;
+            var orangePrice = 2.0;
+
+            // Get the dynamic table element
+            var dynamicTable = document.getElementById("dynamicTable");
+            dynamicTable.style.display = "table";
+
+            // Get the tbody element of the dynamic table
+            var dynamicTableBody = document.getElementById("dynamicTableBody");
+            dynamicTableBody.innerHTML = "";
+
+            // Create and insert a table row for apples
+            var row1 = dynamicTableBody.insertRow();
+            var cell1 = row1.insertCell();
+            var cell2 = row1.insertCell();
+            var cell3 = row1.insertCell();
+            var cell4 = row1.insertCell();
+            cell1.innerHTML = "apple";
+            cell2.innerHTML = appleValue;
+            cell3.innerHTML = applePrice;
+            cell4.innerHTML = (applePrice * parseInt(appleValue)).toFixed(2);
+
+            // Create and insert a table row for pineapples
+            var row2 = dynamicTableBody.insertRow();
+            var cell5 = row2.insertCell();
+            var cell6 = row2.insertCell();
+            var cell7 = row2.insertCell();
+            var cell8 = row2.insertCell();
+            cell5.innerHTML = "pineapple";
+            cell6.innerHTML = pineappleValue;
+            cell7.innerHTML = pineapplePrice;
+            cell8.innerHTML = (pineapplePrice * parseInt(pineappleValue)).toFixed(2);
+
+            // Create and insert a table row for oranges
+            var row3 = dynamicTableBody.insertRow();
+            var cell9 = row3.insertCell();
+            var cell10 = row3.insertCell();
+            var cell11 = row3.insertCell();
+            var cell12 = row3.insertCell();
+            cell9.innerHTML = "orange";
+            cell10.innerHTML = orangeValue;
+            cell11.innerHTML = orangePrice;
+            cell12.innerHTML = (orangePrice * parseInt(orangeValue)).toFixed(2);
+
+            // Calculate and display the total price
+            var totalPrice = (applePrice * parseInt(appleValue) + pineapplePrice * parseInt(pineappleValue) + orangePrice * parseInt(orangeValue)).toFixed(2);
+            var totalRow = dynamicTableBody.insertRow();
+            var totalCell1 = totalRow.insertCell();
+            var totalCell2 = totalRow.insertCell();
+            totalCell1.colSpan = 3;
+            totalCell1.innerHTML = "Thanks for your purchasing! 😊";
+            totalCell2.innerHTML = "Total Prices: $" + totalPrice;
+            totalRow.style.fontWeight = "bold";
+            totalRow.style.textAlign = "right";
+
+        }
+    </script>
 </head>
 
 <body>
     <center>
         <p1 style="font-size: larger;">This is My Digital Calculator</p1>
         <p>Choose your fruits</p>
-        <table border="1">
-            <tr>
-                <th>FruitSTORE</th>
-                <th><img src="apple.jpg" width="150"><br>Apple</th>
-                <th><img src="pineapple.jpg" width="150"><br>Pineapple</th>
-                <th><img src="orange.jpg" width="150"><br>Orange</th>
+        <form onsubmit="showDynamicTable(event)">
+            <table border="1">
+                <tr>
+                    <th>FruitSTORE</th>
+                    <th><img src="apple.jpg" width="150"><br>Apple</th>
+                    <th><img src="pineapple.jpg" width="150"><br>Pineapple</th>
+                    <th><img src="orange.jpg" width="150"><br>Orange</th>
+                </tr>
+                <tr>
+                    <td>Prices</td>
+                    <td>$1</td>
+                    <td>$3</td>
+                    <td>$2</td>
+                </tr>
+                <tr>
+                    <td>Quantity</td>
 
-            </tr>
-            <tr>
-                <td>Prices</td>
-                <td>$1</td>
-                <td>$3</td>
-                <td>$2</td>
-                <!-- <td>
-                <input type="radio" name="pen" value="One">One
-                <input type="radio" name="pen" value="Two">Two
-            </td> -->
-            </tr>
-            <tr>
-                <td>Quantity</td>
+                    <td>
+                        <select name="apple" id="apple">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="pineapple" id="pineapple">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="orange" id="orange">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">Click NEXT to submit your purchase! Thank You!</td>
+                    <td><button type="submit">NEXT</button></td>
 
-                <td>
-                    <input type="radio" name="apple" value="One">One
-                    <input type="radio" name="apple" value="Two">Two
-                    <input type="radio" name="apple" value="Three">Three
-                </td>
-                <td>
-                    <input type="radio" name="pineapple" value="One">One
-                    <input type="radio" name="pineapple" value="Two">Two
-                    <input type="radio" name="pineapple" value="three">Three
-                </td>
-                <td>
-                    <input type="radio" name="orange" value="One">One
-                    <input type="radio" name="orange" value="Two">Two
-                    <input type="radio" name="orange" value="Two">Three
-                </td>
-            </tr>
-            <tr>
-                <td><button>NEXT</button></td>
-                <td colspan="3">Submit your purchase! Thank You!</td>
-            </tr>
+                </tr>
+            </table>
+        </form>
+    </center>
+
+    <br>
+    <hr><br>
+    <center>
+        <table id="dynamicTable" style="display: none;">
+            <thead>
+                <tr>
+                    <th>Items</th>
+                    <th>Quantities</th>
+                    <th>Unit Price</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody id="dynamicTableBody">
+            </tbody>
         </table>
     </center>
+
 </body>
 
 </html>
